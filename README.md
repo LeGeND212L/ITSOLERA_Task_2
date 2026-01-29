@@ -2,7 +2,9 @@
 
 <div align="center">
 
-![Apex Booking Logo](frontend/src/assets/logo.png)
+<img src="frontend/src/assets/logo.png" alt="Apex Booking Logo" width="150" height="130">
+
+<br><br>
 
 A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service booking and management platform with role-based authentication, real-time booking management, and a stunning cyberpunk-inspired UI.
 
@@ -17,6 +19,7 @@ A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service b
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
+
 - **JWT-based authentication** with secure token management
 - **Role-based access control** (Admin, Provider, Customer)
 - Password visibility toggle with eye icons
@@ -25,13 +28,14 @@ A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service b
 
 ### 👥 User Roles
 
-| Role | Capabilities |
-|------|-------------|
-| **Customer** | Browse services, book appointments, manage bookings, view history |
+| Role         | Capabilities                                                           |
+| ------------ | ---------------------------------------------------------------------- |
+| **Customer** | Browse services, book appointments, manage bookings, view history      |
 | **Provider** | Create & manage services, handle booking requests, dashboard analytics |
-| **Admin** | User management, provider approval, platform oversight, full access |
+| **Admin**    | User management, provider approval, platform oversight, full access    |
 
 ### 🛠️ Service Management
+
 - Dynamic service categories with icons
 - Advanced search with real-time filtering
 - Grid and List view options
@@ -39,12 +43,14 @@ A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service b
 - Category-based browsing
 
 ### 📅 Booking System
+
 - Seamless booking workflow
 - Status tracking (Pending, Confirmed, Completed, Cancelled)
 - Booking history for all users
 - Provider booking management
 
 ### 🎨 Modern UI/UX
+
 - **Cyberpunk-inspired dark theme** with neon accents
 - Fully responsive design (Mobile, Tablet, Desktop)
 - Smooth animations and transitions
@@ -58,28 +64,31 @@ A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service b
 ## 🛠️ Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|------------|---------|
-| ![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black) | UI Framework |
-| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white) | Build Tool |
-| ![Redux](https://img.shields.io/badge/Redux_Toolkit-764ABC?style=flat&logo=redux&logoColor=white) | State Management |
+
+| Technology                                                                                                       | Purpose             |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------- |
+| ![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black)                     | UI Framework        |
+| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)                           | Build Tool          |
+| ![Redux](https://img.shields.io/badge/Redux_Toolkit-764ABC?style=flat&logo=redux&logoColor=white)                | State Management    |
 | ![React Router](https://img.shields.io/badge/React_Router_v6-CA4245?style=flat&logo=reactrouter&logoColor=white) | Client-side Routing |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white) | Styling |
-| ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white) | HTTP Client |
+| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)    | Styling             |
+| ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white)                        | HTTP Client         |
 
 ### Backend
-| Technology | Purpose |
-|------------|---------|
+
+| Technology                                                                                            | Purpose             |
+| ----------------------------------------------------------------------------------------------------- | ------------------- |
 | ![Node.js](https://img.shields.io/badge/Node.js_18+-339933?style=flat&logo=nodedotjs&logoColor=white) | Runtime Environment |
-| ![Express](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white) | Web Framework |
-| ![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=flat&logo=mongodb&logoColor=white) | Database |
-| ![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white) | Authentication |
+| ![Express](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)    | Web Framework       |
+| ![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=flat&logo=mongodb&logoColor=white) | Database            |
+| ![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white)         | Authentication      |
 
 ### Deployment
-| Platform | Service |
-|----------|---------|
-| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white) | Frontend & Backend Hosting |
-| ![MongoDB Atlas](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=flat&logo=mongodb&logoColor=white) | Cloud Database |
+
+| Platform                                                                                                    | Service                    |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------- |
+| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)                | Frontend & Backend Hosting |
+| ![MongoDB Atlas](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=flat&logo=mongodb&logoColor=white) | Cloud Database             |
 
 ---
 
@@ -143,6 +152,7 @@ ITSOLERA_Task_2/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - **Node.js 18+** installed
 - **npm** or **yarn** package manager
 - **MongoDB Atlas** account (free tier available)
@@ -150,20 +160,23 @@ ITSOLERA_Task_2/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/LeGeND212L/ITSOLERA_Task_2.git
    cd ITSOLERA_Task_2
    ```
 
 2. **Setup Backend**
+
    ```bash
    cd backend
    npm install
    ```
 
 3. **Configure Backend Environment**
-   
+
    Create `.env` file in `backend/` directory:
+
    ```env
    PORT=5000
    MONGODB_URI=your_mongodb_connection_string
@@ -173,14 +186,16 @@ ITSOLERA_Task_2/
    ```
 
 4. **Setup Frontend**
+
    ```bash
    cd ../frontend
    npm install
    ```
 
-5. **Configure Frontend Environment** *(Optional for local development)*
-   
+5. **Configure Frontend Environment** _(Optional for local development)_
+
    Create `.env` file in `frontend/` directory:
+
    ```env
    VITE_API_URL=http://localhost:5000/api
    ```
@@ -188,12 +203,14 @@ ITSOLERA_Task_2/
 ### Running Locally
 
 1. **Start Backend**
+
    ```bash
    cd backend
    npm run dev
    ```
 
-2. **Start Frontend** *(in a new terminal)*
+2. **Start Frontend** _(in a new terminal)_
+
    ```bash
    cd frontend
    npm run dev
@@ -211,13 +228,13 @@ ITSOLERA_Task_2/
 2. Set **Root Directory** to `backend`
 3. Add environment variables:
 
-   | Variable | Value |
-   |----------|-------|
-   | `MONGODB_URI` | Your MongoDB Atlas connection string |
-   | `JWT_SECRET` | Your secure JWT secret |
-   | `JWT_EXPIRE` | `30d` |
-   | `NODE_ENV` | `production` |
-   | `FRONTEND_URL` | Your frontend Vercel URL |
+   | Variable       | Value                                |
+   | -------------- | ------------------------------------ |
+   | `MONGODB_URI`  | Your MongoDB Atlas connection string |
+   | `JWT_SECRET`   | Your secure JWT secret               |
+   | `JWT_EXPIRE`   | `30d`                                |
+   | `NODE_ENV`     | `production`                         |
+   | `FRONTEND_URL` | Your frontend Vercel URL             |
 
 4. Deploy
 
@@ -227,16 +244,16 @@ ITSOLERA_Task_2/
 2. Set **Root Directory** to `frontend`
 3. Configure build settings:
 
-   | Setting | Value |
-   |---------|-------|
-   | **Build Command** | `node build.mjs` |
-   | **Output Directory** | `dist` |
-   | **Install Command** | `npm install` |
+   | Setting              | Value            |
+   | -------------------- | ---------------- |
+   | **Build Command**    | `node build.mjs` |
+   | **Output Directory** | `dist`           |
+   | **Install Command**  | `npm install`    |
 
 4. Add environment variable:
 
-   | Variable | Value |
-   |----------|-------|
+   | Variable       | Value                                 |
+   | -------------- | ------------------------------------- |
    | `VITE_API_URL` | `https://your-backend.vercel.app/api` |
 
 5. Deploy
@@ -254,8 +271,8 @@ For Vercel deployment, you **must** allow all IPs in MongoDB Atlas:
 
 ## 👤 Demo Credentials
 
-| Role | Email | Password |
-|------|-------|----------|
+| Role      | Email                | Password    |
+| --------- | -------------------- | ----------- |
 | **Admin** | `Admin123@gmail.com` | `Admin123@` |
 
 > 💡 **Tip:** Register as a new customer or provider to test the full workflow!
@@ -265,61 +282,69 @@ For Vercel deployment, you **must** allow all IPs in MongoDB Atlas:
 ## 🔒 API Endpoints
 
 ### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
+
+| Method | Endpoint             | Description       |
+| ------ | -------------------- | ----------------- |
 | `POST` | `/api/auth/register` | User registration |
-| `POST` | `/api/auth/login` | User login |
-| `GET` | `/api/auth/me` | Get current user |
-| `PUT` | `/api/auth/profile` | Update profile |
+| `POST` | `/api/auth/login`    | User login        |
+| `GET`  | `/api/auth/me`       | Get current user  |
+| `PUT`  | `/api/auth/profile`  | Update profile    |
 
 ### Services
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/services` | Get all services |
-| `GET` | `/api/services/:id` | Get service by ID |
-| `POST` | `/api/services` | Create service *(Provider)* |
-| `PUT` | `/api/services/:id` | Update service |
-| `DELETE` | `/api/services/:id` | Delete service |
-| `GET` | `/api/services/categories` | Get all categories |
+
+| Method   | Endpoint                   | Description                 |
+| -------- | -------------------------- | --------------------------- |
+| `GET`    | `/api/services`            | Get all services            |
+| `GET`    | `/api/services/:id`        | Get service by ID           |
+| `POST`   | `/api/services`            | Create service _(Provider)_ |
+| `PUT`    | `/api/services/:id`        | Update service              |
+| `DELETE` | `/api/services/:id`        | Delete service              |
+| `GET`    | `/api/services/categories` | Get all categories          |
 
 ### Bookings
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/bookings` | Get user bookings |
-| `POST` | `/api/bookings` | Create booking |
-| `PUT` | `/api/bookings/:id/status` | Update booking status |
+
+| Method | Endpoint                   | Description           |
+| ------ | -------------------------- | --------------------- |
+| `GET`  | `/api/bookings`            | Get user bookings     |
+| `POST` | `/api/bookings`            | Create booking        |
+| `PUT`  | `/api/bookings/:id/status` | Update booking status |
 
 ### Admin
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/admin/users` | Get all users |
-| `GET` | `/api/admin/providers` | Get pending providers |
-| `PUT` | `/api/admin/providers/:id/approve` | Approve provider |
-| `GET` | `/api/admin/stats` | Get platform statistics |
+
+| Method | Endpoint                           | Description             |
+| ------ | ---------------------------------- | ----------------------- |
+| `GET`  | `/api/admin/users`                 | Get all users           |
+| `GET`  | `/api/admin/providers`             | Get pending providers   |
+| `PUT`  | `/api/admin/providers/:id/approve` | Approve provider        |
+| `GET`  | `/api/admin/stats`                 | Get platform statistics |
 
 ---
 
 ## 📸 Application Screenshots
 
 ### 🏠 Home Page
+
 - Hero section with animated gradient text
 - Popular service categories
 - Latest services showcase
 - Platform statistics
 
 ### 🔍 Services Page
+
 - Real-time search functionality
 - Category filtering sidebar
 - Grid/List view toggle
 - Service cards with hover effects
 
 ### 🔐 Authentication
+
 - Modern login/register forms
 - Password visibility toggle (👁️)
 - Password strength indicator
 - Provider role pre-selection
 
 ### 📊 Dashboards
+
 - **Customer:** View and manage bookings
 - **Provider:** Service management & booking requests
 - **Admin:** Full platform control & analytics
