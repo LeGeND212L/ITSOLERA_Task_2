@@ -1,6 +1,6 @@
 {
-  "buildCommand": "node node_modules/vite/bin/vite.js build",
-  "installCommand": "npm install && chmod -R +x node_modules/.bin || true",
+  "buildCommand": "node build.mjs",
+  "installCommand": "npm install",
   "outputDirectory": "dist",
   "rewrites": [
     {
