@@ -13,7 +13,7 @@ const serviceService = {
 
     getCategories: async () => {
         const response = await api.get('/services/categories');
-        return response.data.data?.categories || response.data.categories || response.data;
+        return response.data;
     },
 
     createService: async (serviceData) => {

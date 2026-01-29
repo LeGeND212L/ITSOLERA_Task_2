@@ -208,7 +208,7 @@ const Services = () => {
           <div className={`${showFilters ? 'block' : 'hidden'} lg:block w-full lg:w-64 flex-shrink-0`}>
             <div className="card sticky top-24">
               <h3 className="text-lg font-semibold text-white mb-4">Categories</h3>
-              <div className="space-y-2">
+              <div className="space-y-2 max-h-[calc(100vh-16rem)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-cyber-500/50 scrollbar-track-dark-700 hover:scrollbar-thumb-cyber-500">
                 <button
                   onClick={() => handleCategoryChange('')}
                   className={`w-full text-left px-3 py-2 rounded-lg transition-all hover:scale-[1.02] ${

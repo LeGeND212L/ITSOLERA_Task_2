@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
@@ -8,6 +8,7 @@ import { getMe } from './redux/slices/authSlice';
 // Components
 import Loader from './components/common/Loader';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import ScrollToTop from './components/common/ScrollToTop';
 import MainLayout from './components/layout/MainLayout';
 import DashboardLayout from './components/layout/DashboardLayout';
 
@@ -41,6 +42,7 @@ import Settings from './pages/Settings';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -50,6 +52,13 @@ function App() {
       dispatch(getMe());
     }
   }, [dispatch, user]);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [location.pathname]);
 
   // Show loader while checking auth
   if (loading && !user) {
@@ -61,33 +70,35 @@ function App() {
   }
 
   return (
-    <Routes>
-      {/* Public Routes with MainLayout */}
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:id" element={<ServiceDetail />} />
-        <Route
-          path="/login"
-          element={
-            isAuthenticated ? (
-              <Navigate to={getDashboardRoute(user?.role)} replace />
-            ) : (
-              <Login />
-            )
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            isAuthenticated ? (
-              <Navigate to={getDashboardRoute(user?.role)} replace />
-            ) : (
-              <Register />
-            )
-          }
-        />
-      </Route>
+    <>
+      <ScrollToTop />
+      <Routes>
+        {/* Public Routes with MainLayout */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetail />} />
+          <Route
+            path="/login"
+            element={
+              isAuthenticated ? (
+                <Navigate to={getDashboardRoute(user?.role)} replace />
+              ) : (
+                <Login />
+              )
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              isAuthenticated ? (
+                <Navigate to={getDashboardRoute(user?.role)} replace />
+              ) : (
+                <Register />
+              )
+            }
+          />
+        </Route>
 
         {/* Admin Routes */}
         <Route
@@ -140,7 +151,7 @@ function App() {
         {/* Catch all - redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-
+    </>
   );
 }
 

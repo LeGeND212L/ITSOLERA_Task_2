@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiMail, FiLock, FiArrowRight } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowRight, FiEye, FiEyeOff } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { login, clearError } from '../../redux/slices/authSlice';
 import Loader from '../../components/common/Loader';
@@ -12,6 +12,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,7 +65,8 @@ const Login = () => {
             <img 
               src={logo} 
               alt="Apex Booking" 
-              className="w-12 h-12 rounded-xl transition-transform group-hover:scale-110" 
+              className="w-24 h-20 rounded-xl transition-transform group-hover:scale-110" 
+              style={{ width: '6rem', height: '5rem' }}
             />
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
@@ -94,14 +96,21 @@ const Login = () => {
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-400" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="input pl-11"
+                  className="input pl-11 pr-11"
                   placeholder="Enter your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-cyber-400 transition-colors"
+                >
+                  {showPassword ? <FiEyeOff className="w-5 h-5" /> : <FiEye className="w-5 h-5" />}
+                </button>
               </div>
             </div>
 

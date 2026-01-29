@@ -93,7 +93,7 @@ const Home = () => {
                 <FiArrowRight />
               </Link>
               {!isAuthenticated && (
-                <Link to="/register" className="btn-outline btn-lg">
+                <Link to="/register?role=provider" className="btn-outline btn-lg">
                   Become a Provider
                 </Link>
               )}

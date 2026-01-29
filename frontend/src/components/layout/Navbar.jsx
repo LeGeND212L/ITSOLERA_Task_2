@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { FiMenu, FiX, FiUser, FiLogOut, FiGrid, FiSettings } from 'react-icons/fi';
@@ -11,6 +11,7 @@ const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -45,10 +46,24 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-dark-200 hover:text-cyber-400 transition-colors font-medium">
+            <Link 
+              to="/" 
+              className={`transition-colors font-medium ${
+                location.pathname === '/' 
+                  ? 'text-cyber-400' 
+                  : 'text-dark-200 hover:text-cyber-400'
+              }`}
+            >
               Home
             </Link>
-            <Link to="/services" className="text-dark-200 hover:text-cyber-400 transition-colors font-medium">
+            <Link 
+              to="/services" 
+              className={`transition-colors font-medium ${
+                location.pathname.startsWith('/services') 
+                  ? 'text-cyber-400' 
+                  : 'text-dark-200 hover:text-cyber-400'
+              }`}
+            >
               Services
             </Link>
 
@@ -132,14 +147,22 @@ const Navbar = () => {
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
-              className="block text-dark-200 hover:text-white py-2"
+              className={`block py-2 ${
+                location.pathname === '/' 
+                  ? 'text-cyber-400' 
+                  : 'text-dark-200 hover:text-white'
+              }`}
             >
               Home
             </Link>
             <Link
               to="/services"
               onClick={() => setIsOpen(false)}
-              className="block text-dark-200 hover:text-white py-2"
+              className={`block py-2 ${
+                location.pathname.startsWith('/services') 
+                  ? 'text-cyber-400' 
+                  : 'text-dark-200 hover:text-white'
+              }`}
             >
               Services
             </Link>

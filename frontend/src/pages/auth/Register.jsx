@@ -1,24 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiUser, FiMail, FiLock, FiArrowRight, FiPhone, FiCheck, FiX } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiArrowRight, FiPhone, FiCheck, FiX, FiEye, FiEyeOff } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { register, clearError } from '../../redux/slices/authSlice';
 import Loader from '../../components/common/Loader';
 import logo from '../../assets/logo.png';
 
 const Register = () => {
+  const [searchParams] = useSearchParams();
+  const roleParam = searchParams.get('role');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     phone: '',
-    role: 'customer',
+    role: roleParam === 'provider' ? 'provider' : 'customer',
   });
 
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -165,7 +170,8 @@ const Register = () => {
             <img 
               src={logo} 
               alt="Apex Booking" 
-              className="w-12 h-12 rounded-xl transition-transform group-hover:scale-110" 
+              className="w-24 h-20 rounded-xl transition-transform group-hover:scale-110" 
+              style={{ width: '6rem', height: '5rem' }}
             />
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
@@ -276,15 +282,22 @@ const Register = () => {
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-400" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`input pl-11 ${errors.password && touched.password ? 'border-red-500' : ''}`}
+                  className={`input pl-11 pr-11 ${errors.password && touched.password ? 'border-red-500' : ''}`}
                   placeholder="Create a password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-cyber-400 transition-colors"
+                >
+                  {showPassword ? <FiEyeOff className="w-5 h-5" /> : <FiEye className="w-5 h-5" />}
+                </button>
               </div>
               {formData.password && (
                 <div className="mt-2">
@@ -331,17 +344,24 @@ const Register = () => {
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-400" />
                 <input
-                  type="password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   id="confirmPassword"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`input pl-11 ${errors.confirmPassword && touched.confirmPassword ? 'border-red-500' : ''}`}
+                  className={`input pl-11 pr-11 ${errors.confirmPassword && touched.confirmPassword ? 'border-red-500' : ''}`}
                   placeholder="Confirm your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-dark-400 hover:text-cyber-400 transition-colors"
+                >
+                  {showConfirmPassword ? <FiEyeOff className="w-5 h-5" /> : <FiEye className="w-5 h-5" />}
+                </button>
                 {!errors.confirmPassword && touched.confirmPassword && formData.confirmPassword && (
-                  <FiCheck className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500" />
+                  <FiCheck className="absolute right-12 top-1/2 -translate-y-1/2 text-emerald-500" />
                 )}
               </div>
               {errors.confirmPassword && touched.confirmPassword && (
