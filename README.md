@@ -2,10 +2,6 @@
 
 <div align="center">
 
-<img src="frontend/src/assets/logo.png" alt="Apex Booking Logo" width="150" height="130">
-
-<br><br>
-
 A modern, full-stack **MERN** (MongoDB, Express.js, React.js, Node.js) service booking and management platform with role-based authentication, real-time booking management, and a stunning cyberpunk-inspired UI.
 
 [![Live Frontend](https://img.shields.io/badge/🌐_Live-Frontend-00D9FF?style=for-the-badge)](https://itsolera-task-2-frontend.vercel.app)
