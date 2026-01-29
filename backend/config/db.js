@@ -1,23 +1,46 @@
 import mongoose from 'mongoose';
 
+// Cache the database connection for serverless
+let cached = global.mongoose;
+
+if (!cached) {
+    cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
-    try {
-        // Mongoose 6+ uses Node.js native DNS by default
-        // Force use of Node.js dns.resolve for better compatibility
-        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+    // If already connected, return existing connection
+    if (cached.conn) {
+        return cached.conn;
+    }
+
+    // If connection is in progress, wait for it
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
             serverSelectionTimeoutMS: 10000,
             socketTimeoutMS: 45000,
-            family: 4, // Force IPv4
-        });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Database Connection Error: ${error.message}`);
-        console.error('Please check:');
-        console.error('1. MongoDB Atlas IP whitelist includes your IP');
-        console.error('2. Username and password are correct');
-        console.error('3. Network/firewall is not blocking the connection');
-        process.exit(1);
+        };
+
+        cached.promise = mongoose.connect(process.env.MONGODB_URI, opts)
+            .then((mongoose) => {
+                console.log('MongoDB Connected');
+                return mongoose;
+            })
+            .catch((error) => {
+                console.error(`Database Connection Error: ${error.message}`);
+                cached.promise = null; // Reset so next request can retry
+                throw error;
+            });
     }
+
+    try {
+        cached.conn = await cached.promise;
+    } catch (e) {
+        cached.promise = null;
+        throw e;
+    }
+
+    return cached.conn;
 };
 
 export default connectDB;

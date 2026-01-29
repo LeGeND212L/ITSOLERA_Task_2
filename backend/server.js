@@ -1,4 +1,3 @@
-import dns from 'dns';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -14,17 +13,10 @@ import adminRoutes from './routes/adminRoutes.js';
 // Load env vars
 dotenv.config();
 
-// Fix DNS resolver for Windows (helps with MongoDB SRV connections)
-dns.setDefaultResultOrder('ipv4first');
-try {
-    dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
-    console.log('DNS resolver configured with Google/Cloudflare DNS');
-} catch (error) {
-    console.log('Using system default DNS resolver');
+// Connect to database on startup (for local development)
+if (process.env.NODE_ENV !== 'production') {
+    connectDB();
 }
-
-// Connect to database
-connectDB();
 
 const app = express();
 
@@ -49,6 +41,17 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Database connection middleware for serverless (ensures connection on each request)
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error('Database connection failed:', error.message);
+        res.status(500).json({ success: false, message: 'Database connection failed' });
+    }
+});
 
 // API Routes
 app.use('/api/auth', authRoutes);
