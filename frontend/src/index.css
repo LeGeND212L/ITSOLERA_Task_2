@@ -27,6 +27,17 @@
     @apply bg-dark-600 rounded-full hover:bg-dark-500;
   }
 
+  /* Fix autofill background color for dark theme */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+    -webkit-text-fill-color: #e2e8f0 !important;
+    caret-color: #e2e8f0 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
   /* Custom scrollbar styles */
   .scrollbar-thin::-webkit-scrollbar {
     @apply w-1.5;
