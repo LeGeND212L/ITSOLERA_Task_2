@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiSearch, FiDollarSign, FiClock, FiUser } from 'react-icons/fi';
+import { FiSearch, FiDollarSign, FiClock, FiUser, FiDatabase, FiTrash2 } from 'react-icons/fi';
 import { fetchAdminServices } from '../../redux/slices/adminSlice';
+import adminService from '../../services/adminService';
 import Loader from '../../components/common/Loader';
 
 const AdminServices = () => {
   const [search, setSearch] = useState('');
+  const [seeding, setSeeding] = useState(false);
+  const [clearing, setClearing] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
   const dispatch = useDispatch();
   const { services, loading, pagination } = useSelector((state) => state.admin);
 
@@ -16,6 +20,38 @@ const AdminServices = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(fetchAdminServices({ search }));
+  };
+
+  const handleSeedServices = async () => {
+    if (!window.confirm('This will add sample services to the database. Continue?')) return;
+    
+    setSeeding(true);
+    setMessage({ type: '', text: '' });
+    try {
+      const result = await adminService.seedServices();
+      setMessage({ type: 'success', text: result.message });
+      dispatch(fetchAdminServices());
+    } catch (error) {
+      setMessage({ type: 'error', text: error.response?.data?.message || 'Failed to seed services' });
+    } finally {
+      setSeeding(false);
+    }
+  };
+
+  const handleClearServices = async () => {
+    if (!window.confirm('This will DELETE ALL services from the database. Are you sure?')) return;
+    
+    setClearing(true);
+    setMessage({ type: '', text: '' });
+    try {
+      const result = await adminService.clearServices();
+      setMessage({ type: 'success', text: result.message });
+      dispatch(fetchAdminServices());
+    } catch (error) {
+      setMessage({ type: 'error', text: error.response?.data?.message || 'Failed to clear services' });
+    } finally {
+      setClearing(false);
+    }
   };
 
   const categoryIcons = {
@@ -33,10 +69,37 @@ const AdminServices = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">All Services</h1>
-        <p className="text-dark-400">View all services on the platform</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white">All Services</h1>
+          <p className="text-dark-400">View all services on the platform</p>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={handleSeedServices}
+            disabled={seeding || clearing}
+            className="btn-primary flex items-center gap-2"
+          >
+            <FiDatabase className="w-4 h-4" />
+            {seeding ? 'Seeding...' : 'Seed Sample Services'}
+          </button>
+          <button
+            onClick={handleClearServices}
+            disabled={seeding || clearing || services.length === 0}
+            className="btn-outline border-red-500 text-red-400 hover:bg-red-500/10 flex items-center gap-2"
+          >
+            <FiTrash2 className="w-4 h-4" />
+            {clearing ? 'Clearing...' : 'Clear All'}
+          </button>
+        </div>
       </div>
+
+      {/* Status Message */}
+      {message.text && (
+        <div className={`p-4 rounded-lg ${message.type === 'success' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
+          {message.text}
+        </div>
+      )}
 
       {/* Search */}
       <form onSubmit={handleSearch} className="flex gap-4">

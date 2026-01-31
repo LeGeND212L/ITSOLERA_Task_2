@@ -3,7 +3,7 @@ import axios from 'axios';
 // Use environment variable for API URL
 // In production, VITE_API_URL must be set to the backend Vercel URL
 // In development, the Vite proxy handles /api requests
-const API_URL = import.meta.env.VITE_API_URL || 
+const API_URL = import.meta.env.VITE_API_URL ||
     (import.meta.env.PROD ? 'https://itsolera-task-2.vercel.app/api' : '/api');
 
 const api = axios.create({
