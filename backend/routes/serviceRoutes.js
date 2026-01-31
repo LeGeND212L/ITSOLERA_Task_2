@@ -17,11 +17,13 @@ const router = express.Router();
 // Public routes
 router.get('/categories', getCategories);
 router.get('/', paginationValidation, validate, getServices);
-router.get('/:id', mongoIdValidation, validate, getServiceById);
 
-// Provider routes
-router.post('/', protect, authorize('provider'), checkApproval, serviceValidation, validate, createService);
+// Provider routes - MUST be defined before /:id routes to avoid conflicts
 router.get('/provider/my-services', protect, authorize('provider'), checkApproval, getMyServices);
+router.post('/', protect, authorize('provider'), checkApproval, serviceValidation, validate, createService);
+
+// Routes with :id parameter - must come after specific routes
+router.get('/:id', mongoIdValidation, validate, getServiceById);
 router.put('/:id', protect, authorize('provider', 'admin'), mongoIdValidation, validate, updateService);
 router.delete('/:id', protect, authorize('provider', 'admin'), mongoIdValidation, validate, deleteService);
 
