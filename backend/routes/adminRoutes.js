@@ -6,9 +6,7 @@ import {
     approveProvider,
     rejectProvider,
     deleteUser,
-    getAdminServices,
-    seedServices,
-    clearServices
+    getAdminServices
 } from '../controllers/adminController.js';
 import { getAllBookings } from '../controllers/bookingController.js';
 import { protect, authorize } from '../middleware/auth.js';
@@ -35,8 +33,6 @@ router.put('/providers/:id/reject', mongoIdValidation, validate, rejectProvider)
 
 // Services management
 router.get('/services', paginationValidation, validate, getAdminServices);
-router.post('/seed-services', seedServices);
-router.delete('/clear-services', clearServices);
 
 // Bookings management
 router.get('/bookings', paginationValidation, validate, getAllBookings);

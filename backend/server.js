@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
+import { autoSeedServices } from './utils/autoSeed.js';
 
 // Route imports
 import authRoutes from './routes/authRoutes.js';
@@ -15,7 +16,7 @@ dotenv.config();
 
 // Connect to database on startup (for local development)
 if (process.env.NODE_ENV !== 'production') {
-    connectDB();
+    connectDB().then(() => autoSeedServices());
 }
 
 const app = express();
@@ -42,10 +43,18 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Track if auto-seed has run this instance
+let hasAutoSeeded = false;
+
 // Database connection middleware for serverless (ensures connection on each request)
 app.use(async (req, res, next) => {
     try {
         await connectDB();
+        // Auto-seed on first request in production (serverless)
+        if (!hasAutoSeeded) {
+            await autoSeedServices();
+            hasAutoSeeded = true;
+        }
         next();
     } catch (error) {
         console.error('Database connection failed:', error.message);
